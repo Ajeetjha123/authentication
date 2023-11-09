@@ -2,8 +2,10 @@ import { useRef } from "react";
 import classes from "./ProfileForm.module.css";
 import { useContext } from "react";
 import AuthContext from "../../store/context";
+import { useNavigate } from "react-router-dom";
 
 const ProfileForm = () => {
+  const navigate = useNavigate();
   const newPasswordInputRef = useRef();
   const authCtx = useContext(AuthContext);
   const submitHandler = (event) => {
@@ -24,7 +26,9 @@ const ProfileForm = () => {
           "Content-type": "application/json",
         },
       }
-    );
+    ).then((data) => {
+      navigate("/");
+    });
   };
   return (
     <form className={classes.form} onSubmit={submitHandler}>
